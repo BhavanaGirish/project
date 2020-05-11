@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DSCE</title>
+  <link rel="stylesheet" type="text/css" href="PROJECT.CSS">
+
+9.	<script>
+10.	
+11.	var video = document.querySelector("#videoElement");
+12.	
+13.	if (navigator.mediaDevices.getUserMedia) {
+14.	  navigator.mediaDevices.getUserMedia({ video: true })
+15.	    .then(function (stream) {
+16.	      video.srcObject = stream;
+17.	      
+18.	
+19.	// Optional frames per second argument.
+20.	var stream = video.captureStream(25);
+21.	var recordedChunks = [];
+22.	console.log(stream);
+23.	var options = { mimeType: "video/webm; codecs=vp9" };
+24.	mediaRecorder = new MediaRecorder();
+25.	    })
+26.	    .catch(function (err0r) {
+27.	      console.log("Something went wrong!");
+28.	    });
+29.	}
+30.	</script>
+31.	
+32.	<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-app.js"></script>
+33.	
+34.	<!-- TODO: Add SDKs for Firebase products that you want to use
+35.	     https://firebase.google.com/docs/web/setup#available-libraries -->
+36.	<script src="https://www.gstatic.com/firebasejs/7.14.3/firebase-analytics.js"></script>
+37.	
+38.	<script>
+39.	  // Your web app's Firebase configuration
+40.	  var Config = {
+41.	    apiKey: "AIzaSyABR8tc3JuUZzPFFPMX1GFBLkP9HZmzT_k",
+42.	    authDomain: "data-440b2.firebaseapp.com",
+43.	    databaseURL: "https://data-440b2.firebaseio.com",
+44.	    projectId: "data-440b2",
+45.	    storageBucket: "data-440b2.appspot.com",
+46.	    messagingSenderId: "287952508409",
+47.	    appId: "1:287952508409:web:7d26d3fa983724b63e9928",
+48.	    measurementId: "G-C3TC6JJVXT"
+49.	  };
+50.	  firebase.initializeApp(Config)
+51.	  
+52.	 // Reference messages collection
+53.	var messagesRef = firebase.database().ref('data-440b2');
+54.	
+55.	// Listen for form submit
+56.	document.getElementById('contactForm').addEventListener('submit', submitForm);
+57.	
+58.	// Submit form
+59.	function submitForm(e){
+60.	  e.preventDefault();
+61.	
+62.	  // Get values
+63.	  var name = getInputVal('name');
+64.	  var usn = getInputVal('usn');
+65.	  var email = getInputVal('email');
+66.	 
+67.	
+68.	  // Save message
+69.	  saveMessage(name, usn, email);
+70.	
+71.	  // Show alert
+72.	  document.querySelector('.alert').style.display = 'block';
+73.	
+74.	  // Hide alert after 3 seconds
+75.	  setTimeout(function(){
+76.	    document.querySelector('.alert').style.display = 'none';
+77.	  },3000);
+78.	
+79.	  // Clear form
+80.	  document.getElementById('contactForm').reset();
+81.	}
+82.	
+83.	// Function to get get form values
+84.	function getInputVal(id){
+85.	  return document.getElementById(id).value;
+86.	}
+87.	
+88.	// Save message to firebase
+89.	function saveMessage(name, usn, email){
+90.	  var newMessageRef = messagesRef.push();
+91.	  newMessageRef.set({
+92.	    name: name,
+93.	    usn:usn,
+94.	    email:email
+95.	  });
+96.	}
+97.	
+98.	</script>
+
+
+</head>
+<body>
+ <H1 ALIGN="center">STUDENTS DATA ENTRY</H1>
+ <div ALIGN="center" class="col">
+                <form ALIGN="center" class="signupform" action="end.html">
+                <h6>STUDENT DETAILS ENTRY</h6>
+                <input type="text" name="name" placeholder="Full Name"><br>
+                <input type="text" name="name" placeholder="USN-10 DIGIT"><br>
+                <input type="email" name="email" placeholder="Email"><br>
+                <button style="trial" type="submit" value="submit">SUBMIT</button>
+                <p style="font-size:11px;">* We don’t share your personal info with anyone. Check out our <a href="#">Privacy Policy</a> for more information.</p>
+                </form>
+ </div>
+ <div id="container" class="col">
+	<video autoplay="true" id="videoElement">
+	</video>
+    <P><PRE><B>
+    Adjust camera...
+    *ONLY CANDIDATE SHOULD BE PRESENT IN THE FRAME*
+    <PRE><P>
+ </div>
+<script>
+var video = document.querySelector("#videoElement");
+
+if (navigator.mediaDevices.getUserMedia) {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err0r) {
+      console.log("Something went wrong!");
+    });
+}
+</script>
+
+</body>
+</html>
